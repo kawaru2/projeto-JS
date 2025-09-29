@@ -1,0 +1,59 @@
+.euTeAmo {
+  font-weight: bold;
+}
+
+.red {
+  color: darkred;
+}
+
+.blue {
+  color: darkblue;
+}
+
+.purple {
+  color: purple;
+}
+
+.pink {
+  color: pink;
+}
+
+/*  CARROSSEL  */
+
+.carousel {
+  position: relative;
+  width: 400px;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform .5s ease-in-out;
+  width: 1200px; /*  3 imagens de 400px  */
+}
+
+.slides img {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.thumbnails img {
+  width: 60px;
+  height: 45px;
+  margin: 0 auto;
+  cursor: pointer;
+  opacity: .6;
+  border: 2px solid transparent;
+}
+
+.thumbnails img.active {
+  opacity: 1;
+  border-color: #333;
+}
