@@ -2,6 +2,7 @@
 let id;
 let indexColor = 0;
 const listColors = ["darkred", "darkblue", "purple", "green", "orange"];
+const btnEvent = document.querySelector(".btnAcao");
 
 function createTittle(name) {
   const message = document.querySelector("#msgPrincipal");
@@ -10,7 +11,7 @@ function createTittle(name) {
 }
 
 function createDescription(content) {
-  document.querySelector("#descricao").textContent = content
+  document.querySelector("#descricao").innerHTML = content
 }
 // EXECUTAR UMA FUNÇÃO QUE ESPERA UM EVENTO DE CLICK E RENDERIZA O CONTEUDO/ANIMAÇÃO.
 function contentEvent(nickname) {
@@ -26,17 +27,42 @@ function contentEvent(nickname) {
   // CARROSSEL COM FOTOS NOSSAS
   
 function createCarousel() {
-  const structure = `<div class="carousel>"
+  const structure = `
+<div class="carousel">
   <div class="slides">
     <img src="./images/foto1.jpg" class="active">
     <img src="./images/foto2.jpg">
     <img src="./images/foto3.jpg">
+    <img src="./images/foto4.jpg">
+    <img src="./images/foto5.jpg">
+  </div>
   <div class="thumbnails">
     <img src="./images/foto1.jpg" data-index="0">
     <img src="./images/foto2.jpg" data-index="1">
-    <img src="./images/foto3.jpg" data-index="2">`;
-  const tagCarousel = createTag("div", structure)
+    <img src="./images/foto3.jpg" data-index="2">
+    <img src="./images/foto4.jpg" data-index="3">
+    <img src="./images/foto5.jpg" data-index="4">
+  </div>
+</div>
+`;
+  const tagCarousel = document.createElement("div")
+  tagCarousel.innerHTML = structure
   tagCarousel.classList.add("teste")
+  
+  const slides = tagCarousel.querySelector(".slides");
+  const thumbs = tagCarousel.querySelectorAll(".thumbnails img");
+  
+  thumbs.forEach(thumb => {
+    thumb.addEventListener("click", () => {
+      const index = parseInt(thumb.dataset.index);
+      slides.style.transform = `translateX(-${index * 100}vw)`;
+      
+      thumbs.forEach(thumbnail => {thumbnail.classList.remove("active")});
+      thumb.classList.add("active");
+      
+    })
+  })
+  
   return tagCarousel
 }
   
@@ -47,9 +73,25 @@ function createTag(tagName, tagHTML) {
   newTag.innerHTML = tagHTML
   return newTag;
 }
+
+//  EVENT
+
+function eventClickOnButton() {
+  const button = document.querySelector(".btnAcao")
+  if(button.classList.contains("eventActive")) {
+    button.classList.remove("eventActive")
+    button.classList.add("eventDesactive")
+    button.textContent = "MOSTRAR"
+    return;
+  }
+  button.classList.remove("eventDesactive")
+  button.classList.add("eventActive")
+  button.textContent = "ESCONDER"
+}
+
 // CODAR UM SET TIME PARA MUDAR AS CORES DAS PALAVRAS (CSS)
 
-function changeColorAnimation() {
+function changeAnimation() {
   const listPhrase = document.querySelectorAll(".euTeAmo");
   setInterval(() => {
     listPhrase.forEach(content => {
@@ -61,10 +103,8 @@ function changeColorAnimation() {
 
 // RENDER
 function render() {
-  const to = document.querySelector("#conteudo");
-  const listMessages = contentEvent("Sarita");
   createTittle("Sara")
-  createDescription("Quero lhe entregar esse presente utilizando um pouquinho de conhecimento da área da tecnologia, espero que goste ♥️")
+  createDescription('Quero lhe entregar esse presente utilizando um pouquinho de conhecimento da área da tecnologia, espero que goste <span id="emoji">♥️</span>')
   
 }
 
@@ -86,18 +126,62 @@ function eventRender() {
       }, i * 3000)
     }
     setTimeout(() => { // TEMPO PARA EXECUTAR A FUNÇÃO DE ANIMAÇÃO DE TROCA DAS CORES.
-      changeColorAnimation()
+      changeAnimation()
+      lastContentRender(to)
     }, 9000)
     id = true
   } else if (id) {
     to.innerHTML = ""
     id = false
   }
-  
 }
 
-const btnEvent = document.querySelector("#btnAcao")
+function eventLastContentRender() {
+  const listPhotos = document.querySelectorAll(".itemListaFoto")
+  listPhotos.forEach(photo => {
+    photo.addEventListener("click", () => {
+      photo.classList.toggle("scale")
+    })
+  })
+}
+
+function lastContentRender(to) {
+  const listPhotos = document.createElement("ul");
+  const bigHeart = document.createElement("img");
+  
+  bigHeart.src = "./images/heart.jpg"
+  bigHeart.classList.add("heart")
+  
+  listPhotos.classList.add("listaFotos")
+  listPhotos.innerHTML = `
+<li class="itemListaFoto"><img src="./images/foto6.jpg"></li>
+<li class="itemListaFoto"><img src="./images/foto7.jpg"></li>
+<li class="itemListaFoto"><img src="./images/foto8.jpg"></li>
+<li class="itemListaFoto"><img src="./images/foto9.jpg"></li>
+`
+
+  const lastText = document.createElement("p");
+  const poema = `
+O amor é fogo que arde sem se ver,
+é ferida que dói e não se sente;<br>
+É um contentamento descontente,
+é dor que desatina sem doer.
+`
+  lastText.classList.add("lastText")
+  lastText.innerHTML = `
+Você é uma pessoa incrível!
+Eu sou a pessoa mais sortuda do mundo. Eu ganhei na loteria, mas o meu prêmio não foi dinheiro, pois eu ganhei na loteria do amor, tive a grande sorte de ganhar o seu amor. Muitos piratas procuram pelo baú do tesouro, infelizmente pra eles só haverá o baú, pois o tesouro está comigo, é você, meu amor! Meu amor, é curioso que conversamos todos os dias mas, de qualquer forma, sinto muito a sua falta... Eu não sei mais o que dizer, eu já falei tantas coisas, mas eu quero que saiba que o meu amor por você só cresce, todos os dias eu me surpreendo pelo tamanho dele. Eu quero deixar uma pequena parte de uma poesia, eu penso nela todos os dias pois é ela que me faz lembrar do meu amor por você, e diz assim:<br><span id="poema">"${poema}"<br>Luís Vaz de Camões.</span>
+` // Ainda vou escrever à mão essa parte.
+
+to.appendChild(listPhotos)
+to.appendChild(bigHeart)
+to.appendChild(lastText)
+
+eventLastContentRender()
+
+}
 
 btnEvent.addEventListener("click", eventRender)
+btnEvent.addEventListener("click", eventClickOnButton)
 
 window.onload = render
