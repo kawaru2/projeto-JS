@@ -170,16 +170,16 @@ function lastContentRender(to) {
   
   listPhotos.classList.add("listaFotos")
   listPhotos.innerHTML = `
-<li class="itemListaFoto"><img src="./images/conteudoFoto1.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto2.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto3.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto4.jpeg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto5.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto6.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto7.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto8.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto9.jpg"></li>
-<li class="itemListaFoto"><img src="./images/conteudoFoto10.jpg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto1.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto2.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto3.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto4.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto5.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto6.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto7.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto8.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto9.svg"></li>
+<li class="itemListaFoto"><img src="./images/conteudoFoto10.svg"></li>
 `
 
   const lastText = document.createElement("p");
